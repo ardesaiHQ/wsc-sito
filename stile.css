@@ -1,0 +1,215 @@
+/* Wrist Selection Club — identità della tavola del marchio:
+   Nero Profondo #0B0B0B, Oro Champagne #D4AF37, Avorio #F5EBD7; Playfair Display e Montserrat.
+   I font stanno nel sito (cartella caratteri, licenza OFL): nessun collegamento esterno né tracciamento. */
+
+@font-face { font-family: "Playfair Display"; font-style: normal; font-weight: 400 700; font-display: swap;
+  src: url("caratteri/playfair.woff2") format("woff2"); }
+@font-face { font-family: "Playfair Display"; font-style: italic; font-weight: 400 700; font-display: swap;
+  src: url("caratteri/playfair-corsivo.woff2") format("woff2"); }
+@font-face { font-family: "Montserrat"; font-style: normal; font-weight: 300 600; font-display: swap;
+  src: url("caratteri/montserrat.woff2") format("woff2"); }
+
+:root {
+  --nero: #0b0b0b;
+  --carbone: #131312;
+  --linea: #2c281f;
+  --oro: #d4af37;
+  --oro-chiaro: #f3dc9a;
+  --oro-scuro: #9c7a2b;
+  --avorio: #f5ebd7;
+  --tenue: #a49c8c;
+  --serif: "Playfair Display", Didot, "Bodoni 72", Georgia, serif;
+  --sans: Montserrat, "Helvetica Neue", "Segoe UI", system-ui, sans-serif;
+  --gradiente: linear-gradient(135deg, var(--oro-chiaro) 0%, var(--oro) 45%, var(--oro-scuro) 100%);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--nero);
+  color: var(--avorio);
+  font: 300 16px/1.8 var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--oro); }
+img { max-width: 100%; display: block; }
+.oro-testo { background: var(--gradiente); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* --- Apertura --- */
+.apertura {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 90px 20px 70px;
+  background:
+    radial-gradient(ellipse at 50% 42%, rgba(212, 175, 55, 0.12), transparent 58%),
+    radial-gradient(ellipse at 85% 100%, rgba(212, 175, 55, 0.07), transparent 50%),
+    var(--nero);
+  text-align: center;
+}
+.menu {
+  position: absolute;
+  top: 24px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px clamp(16px, 4.5vw, 44px);
+  padding: 0 12px;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+.menu a { color: var(--tenue); text-decoration: none; transition: color 0.3s; }
+.menu a:hover, .menu a:focus-visible { color: var(--oro); }
+.marchio { animation: emerge 1.8s ease-out both; }
+.corona { width: clamp(92px, 16vw, 150px); height: clamp(48px, 8.3vw, 78px); display: block; margin: 0 auto 6px; }
+.marchio h1 { margin: 0; font-weight: 400; }
+.wrist {
+  display: block;
+  font: 400 clamp(58px, 15vw, 150px)/1 var(--serif);
+  letter-spacing: 0.06em;
+  margin-right: -0.06em;  /* compensa la spaziatura dopo l'ultima lettera, così resta al centro */
+  background: var(--gradiente);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.riga-club {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(10px, 2.4vw, 22px);
+  margin-top: clamp(10px, 2vw, 18px);
+  font: 400 clamp(14px, 3.4vw, 30px)/1 var(--serif);
+  letter-spacing: clamp(0.18em, 1.4vw, 0.36em);
+  color: var(--oro);
+}
+.trattino { width: clamp(28px, 6vw, 62px); height: 1px; background: var(--oro); }
+.motto {
+  margin: clamp(22px, 4vw, 34px) 0 0;
+  font: italic 400 clamp(15px, 2.6vw, 24px) var(--serif);
+  letter-spacing: 0.16em;
+  color: var(--avorio);
+}
+.scendi {
+  position: absolute;
+  bottom: 26px;
+  color: var(--tenue);
+  text-decoration: none;
+  font-size: 20px;
+  animation: respira 2.8s ease-in-out infinite;
+}
+@keyframes emerge { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@keyframes respira { 50% { transform: translateY(6px); opacity: 0.6; } }
+
+/* --- Sezioni --- */
+.sezione { max-width: 1120px; margin: 0 auto; padding: clamp(76px, 12vw, 136px) 22px 0; }
+.sezione.stretta { max-width: 760px; text-align: center; }
+.occhiello {
+  margin: 0 0 14px;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  color: var(--oro);
+}
+.sezione h2 {
+  margin: 0 0 26px;
+  font: 400 clamp(28px, 4.6vw, 44px)/1.2 var(--serif);
+  color: var(--avorio);
+}
+#selezione h2, #selezione .occhiello { text-align: center; }
+.sezione p { margin: 0 0 14px; }
+.inglese { color: var(--tenue); font: italic 400 15px/1.7 var(--serif); }
+
+/* --- La vetrina --- */
+/* Le schede restano al centro anche quando gli orologi sono pochi. */
+.vetrina { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 340px)); justify-content: center; gap: 28px; margin-top: 10px; }
+.pezzo { background: var(--carbone); border: 1px solid var(--linea); display: flex; flex-direction: column; transition: border-color 0.4s; }
+.pezzo:hover { border-color: rgba(212, 175, 55, 0.5); }
+.pezzo figure { margin: 0; aspect-ratio: 4 / 5; background: #000; overflow: hidden; }
+.pezzo .foto-grande { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s ease; }
+.pezzo:hover .foto-grande { transform: scale(1.03); }
+.miniature { display: flex; gap: 6px; padding: 8px 12px 0; }
+.miniature button { padding: 0; border: 1px solid var(--linea); background: none; width: 46px; height: 46px; cursor: pointer; }
+.miniature img { width: 100%; height: 100%; object-fit: cover; }
+.pezzo .info { padding: 20px 22px 24px; display: flex; flex-direction: column; flex: 1; }
+.pezzo .marca { margin: 0; font-size: 11px; font-weight: 500; letter-spacing: 0.34em; text-transform: uppercase; color: var(--oro); }
+.pezzo h3 { margin: 6px 0 8px; font: 400 25px/1.25 var(--serif); color: var(--avorio); }
+.pezzo .dati { margin: 0; font-size: 13px; color: var(--tenue); }
+.pezzo .descrizione { margin: 14px 0 0; font-size: 14px; white-space: pre-line; }
+.pezzo .piede { margin-top: auto; padding-top: 18px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.pezzo .stato { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--tenue); }
+.pezzo .stato.disponibile { color: var(--oro); }
+.vetrina-vuota { grid-column: 1 / -1; text-align: center; color: var(--tenue); padding: 44px 0; border-top: 1px solid var(--linea); border-bottom: 1px solid var(--linea); }
+.vetrina-vuota p:first-child { font: italic 22px var(--serif); color: var(--avorio); }
+
+/* --- Le rubriche (come le icone in evidenza di Instagram) --- */
+.rubriche { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+.rubrica .cerchio {
+  width: 92px; height: 92px; margin: 0 auto 14px; border-radius: 50%;
+  border: 1.5px solid var(--oro); display: flex; align-items: center; justify-content: center;
+  box-shadow: inset 0 0 0 4px var(--nero), inset 0 0 0 5px rgba(212, 175, 55, 0.25);
+}
+.rubrica svg { width: 44px; height: 44px; }
+.rubrica h3 { margin: 0 0 6px; font-size: 12px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--avorio); }
+.rubrica p { font-size: 14px; margin: 0 0 4px; }
+.rubrica .inglese { font-size: 13px; }
+
+/* --- Principi, dichiarazione e contatti --- */
+.tre { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; text-align: left; }
+.tre h3 { margin: 0 0 10px; font: 400 22px var(--serif); color: var(--avorio); }
+.tre > div { border-top: 1px solid var(--oro); padding-top: 18px; }
+.tre p { font-size: 14px; }
+.dichiarazione { max-width: 1120px; margin: clamp(80px, 12vw, 130px) auto 0; padding: 0 22px; text-align: right; }
+.dichiarazione p { margin: 0; font-size: clamp(12px, 1.6vw, 15px); letter-spacing: 0.4em; text-transform: uppercase; color: var(--avorio); line-height: 2.1; }
+.dichiarazione .filetto { display: inline-block; width: 80px; height: 1px; background: var(--oro); margin-top: 14px; }
+.bottone {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 13px 30px;
+  border: 1px solid var(--oro);
+  color: var(--oro);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  transition: background 0.3s, color 0.3s;
+}
+.bottone:hover, .bottone:focus-visible { background: var(--oro); color: var(--nero); }
+.bottone.piccolo { padding: 9px 16px; font-size: 10px; margin: 0; }
+.social { display: flex; justify-content: center; gap: 22px; margin-top: 26px; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; }
+.social a { color: var(--tenue); text-decoration: none; }
+.social a:hover { color: var(--oro); }
+
+/* --- Piè di pagina e pagine semplici --- */
+footer { margin-top: clamp(80px, 12vw, 140px); padding: 44px 22px 50px; border-top: 1px solid var(--linea); text-align: center; color: var(--tenue); font-size: 13px; }
+footer p { margin: 4px 0; }
+footer .monogramma { margin: 0 auto 14px; border-radius: 12px; }
+footer .firma { font: 400 15px var(--serif); letter-spacing: 0.32em; color: var(--oro); }
+footer .motto-piccolo { font: italic 14px var(--serif); color: var(--avorio); }
+footer .piccolo { margin-top: 16px; font-size: 11px; }
+footer a { color: var(--tenue); }
+.pagina { max-width: 720px; margin: 0 auto; padding: 60px 22px 0; }
+.pagina h1 { font: 400 36px var(--serif); color: var(--avorio); margin: 20px 0 24px; }
+.pagina h2 { font: 400 22px var(--serif); color: var(--oro); margin: 34px 0 10px; }
+.pagina .torna { font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--tenue); text-decoration: none; }
+
+@media (max-width: 760px) {
+  .rubriche { grid-template-columns: repeat(2, 1fr); gap: 30px 16px; }
+  .tre { grid-template-columns: 1fr; gap: 26px; }
+  .vetrina { grid-template-columns: minmax(0, 1fr); }
+  .menu { font-size: 10px; letter-spacing: 0.2em; }
+  .dichiarazione { text-align: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+}
