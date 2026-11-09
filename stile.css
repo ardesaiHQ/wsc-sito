@@ -185,9 +185,8 @@ img { max-width: 100%; display: block; }
 }
 .bottone:hover, .bottone:focus-visible { background: var(--oro); color: var(--nero); }
 .bottone.piccolo { padding: 9px 16px; font-size: 10px; margin: 0; }
-.social { display: flex; justify-content: center; gap: 22px; margin-top: 26px; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; }
-.social a { color: var(--tenue); text-decoration: none; }
-.social a:hover { color: var(--oro); }
+.social { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 12px; }
+.social .bottone { margin-top: 0; }
 
 /* --- Piè di pagina e pagine semplici --- */
 footer { margin-top: clamp(80px, 12vw, 140px); padding: 44px 22px 50px; border-top: 1px solid var(--linea); text-align: center; color: var(--tenue); font-size: 13px; }
