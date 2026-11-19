@@ -82,6 +82,7 @@
     <section id="selezione" class="sezione">
       <p class="occhiello">La Selezione · The Selection</p>
       <h2>La Selezione</h2>
+      <p class="suggerimento">Tocca un orologio per vederlo da vicino · <span class="inglese">Tap a watch for details</span></p>
       <div class="vetrina">
         <article class="pezzo">
           <figure><img class="foto-grande" src="orologi/4-1.jpg" alt="Audemars Piguet Royal Oak 41 mm" loading="lazy"></figure><div class="miniature"><button type="button" data-foto="orologi/4-1.jpg" aria-label="Foto 1"><img src="orologi/4-1.jpg" alt="" loading="lazy"></button><button type="button" data-foto="orologi/4-2.jpg" aria-label="Foto 2"><img src="orologi/4-2.jpg" alt="" loading="lazy"></button></div>
@@ -260,6 +261,12 @@
     </section>
   </main>
 
+  <!-- La scheda completa di un orologio: sul telefono si apre toccandolo nella griglia. -->
+  <dialog id="scheda" class="scheda" aria-label="Scheda dell'orologio">
+    <button type="button" class="chiudi" aria-label="Chiudi · Close">×</button>
+    <div class="scheda-contenuto"></div>
+  </dialog>
+
   <footer>
     <img class="monogramma" src="icona.svg" alt="" width="54" height="54">
     <p class="firma">WRIST SELECTION CLUB</p>
@@ -275,6 +282,61 @@
         b.addEventListener("click", () => { grande.src = b.dataset.foto; });
       });
     });
+
+    // Sul telefono la vetrina è una griglia: toccando un orologio si apre la sua scheda completa,
+    // con le foto da sfogliare col dito. Il tasto "indietro" del telefono chiude la scheda (non esce dal sito).
+    const telefono = window.matchMedia("(max-width: 600px)");
+    const scheda = document.getElementById("scheda");
+    const contenuto = scheda.querySelector(".scheda-contenuto");
+
+    function apriScheda(pezzo) {
+      const foto = [...pezzo.querySelectorAll(".miniature button")].map((b) => b.dataset.foto);
+      const grande = pezzo.querySelector(".foto-grande");
+      if (!foto.length && grande) foto.push(grande.getAttribute("src"));
+      const nome = pezzo.querySelector("h3").textContent;
+
+      const copia = document.createElement("article");
+      copia.className = "pezzo";
+      if (foto.length) {
+        const galleria = document.createElement("div");
+        galleria.className = "galleria";
+        foto.forEach((f, i) => {
+          const img = document.createElement("img");
+          img.src = f;
+          img.alt = `${nome} · foto ${i + 1}`;
+          galleria.append(img);
+        });
+        copia.append(galleria);
+        if (foto.length > 1) {
+          const contatore = document.createElement("p");
+          contatore.className = "contatore";
+          contatore.textContent = `1 / ${foto.length} · scorri · swipe ⟷`;
+          galleria.addEventListener("scroll", () => {
+            const n = Math.round(galleria.scrollLeft / galleria.clientWidth) + 1;
+            contatore.textContent = `${n} / ${foto.length}`;
+          }, { passive: true });
+          copia.append(contatore);
+        }
+      }
+      copia.append(pezzo.querySelector(".info").cloneNode(true));
+      contenuto.replaceChildren(copia);
+      scheda.showModal();
+      scheda.scrollTop = 0;
+      history.pushState({ scheda: true }, "");
+    }
+
+    document.querySelectorAll(".vetrina .pezzo").forEach((pezzo) => {
+      pezzo.addEventListener("click", (e) => {
+        if (!telefono.matches || e.target.closest("a")) return;
+        apriScheda(pezzo);
+      });
+    });
+    scheda.querySelector(".chiudi").addEventListener("click", () => scheda.close());
+    // Comunque si chiuda (tasto ×, tasto indietro), si toglie il passo aggiunto alla cronologia.
+    scheda.addEventListener("close", () => {
+      if (history.state && history.state.scheda) history.back();
+    });
+    window.addEventListener("popstate", () => { if (scheda.open) scheda.close(); });
   </script>
   <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "261f789c86bc4eee9f0e6fc2f87a402d"}'></script><!-- End Cloudflare Web Analytics -->
 </body>

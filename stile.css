@@ -201,6 +201,40 @@ footer a { color: var(--tenue); }
 .pagina h2 { font: 400 22px var(--serif); color: var(--oro); margin: 34px 0 10px; }
 .pagina .torna { font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--tenue); text-decoration: none; }
 
+/* --- La scheda completa di un orologio (sul telefono, toccandolo nella griglia) --- */
+.scheda {
+  width: 100%; max-width: 100%; height: 100%; max-height: 100%; margin: 0; padding: 0; border: 0;
+  background: var(--carbone); color: var(--avorio); overscroll-behavior: contain;
+}
+.scheda::backdrop { background: rgba(0, 0, 0, 0.85); }
+body:has(.scheda[open]) { overflow: hidden; }
+.scheda .chiudi {
+  position: fixed; top: 12px; right: 12px; z-index: 2; width: 44px; height: 44px; border-radius: 50%;
+  border: 1px solid var(--oro); background: rgba(11, 11, 11, 0.75); color: var(--oro);
+  font: 300 26px/1 var(--sans); cursor: pointer;
+}
+.scheda .pezzo { border: 0; background: none; }
+.galleria { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; background: #000; }
+.galleria::-webkit-scrollbar { display: none; }
+.galleria img { flex: 0 0 100%; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; scroll-snap-align: center; }
+.contatore { margin: 10px 0 0; text-align: center; font-size: 11px; letter-spacing: 0.3em; color: var(--tenue); }
+.suggerimento { display: none; }
+
+@media (max-width: 600px) {
+  /* La vetrina diventa una griglia a due colonne: foto, marca e modello. Il resto è nella scheda completa. */
+  #selezione .vetrina { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .vetrina .pezzo { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+  .vetrina .pezzo .miniature, .vetrina .pezzo .dati, .vetrina .pezzo .descrizione,
+  .vetrina .pezzo .piede .bottone, .vetrina .pezzo .piede:not(:has(.disponibile)) { display: none; }
+  .vetrina .pezzo .info { padding: 10px 10px 12px; }
+  .vetrina .pezzo .marca { font-size: 9px; letter-spacing: 0.22em; }
+  .vetrina .pezzo h3 { margin: 4px 0 0; font-size: 16px; }
+  .vetrina .pezzo .piede { padding-top: 6px; }
+  .vetrina .pezzo .stato { font-size: 9px; letter-spacing: 0.14em; }
+  .suggerimento { display: block; margin: -12px 0 18px; text-align: center; font-size: 12px; color: var(--tenue); }
+  .suggerimento .inglese { font-size: 13px; }
+}
+
 @media (max-width: 760px) {
   .rubriche { grid-template-columns: repeat(2, 1fr); gap: 30px 16px; }
   .tre { grid-template-columns: 1fr; gap: 26px; }
